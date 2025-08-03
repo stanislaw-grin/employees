@@ -4,9 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "start": "npm run server & npm run dev",
-    "build": "tsc -b && vite build",
+    "install:dev": "pnpm i && cd ./server && pnpm i",
+    "dev": "vite --port 3000",
+    "start": "npm run server & npm run preview",
+    "build": "pnpm install:dev && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "server": "node ./server/index.js",

@@ -24,12 +24,25 @@ This is a React application for managing employees, built with React, TypeScript
 ### Installation
 
 ```bash
-pnpm install
+pnpm install:dev
 ```
 
 ### Running the Application
 
 ```bash
+# Build the application
+pnpm build
+
+# Start the application
+pnpm start
+```
+
+### Developing the Application
+
+```bash
+# Install dependencies
+pnpm run install:dev
+
 # Start the development server
 pnpm run dev
 
