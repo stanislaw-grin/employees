@@ -2,7 +2,7 @@
   "name": "employees-ox-server",
   "private": true,
   "version": "1.0.0",
-  "description": "",
+  "description": "Employee management system server",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"

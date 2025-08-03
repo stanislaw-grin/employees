@@ -20,7 +20,7 @@ export const SearchInput = ({ searchQuery, setSearchQuery }: Props) => {
         id="employee-search"
         type="text"
         value={searchQuery}
-        onChange={(e) => { setSearchQuery(e.target.value); }}
+        onChange={(e) => setSearchQuery(e.target.value)}
         placeholder="Type to search"
         className="w-full pl-10 pr-4 py-4 border-none focus:outline-none focus:ring-2 focus:ring-sky-500 placeholder-gray-400 font-light"
       />

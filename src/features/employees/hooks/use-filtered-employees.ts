@@ -7,10 +7,12 @@ function filterEmployees(
   statusFilter: Status | '',
   searchQuery: string
 ) {
+  const lowerSearchQuery = searchQuery.toLowerCase()
+
   return employees.filter((employee) => {
     const matchesStatus = statusFilter === '' || employee.status === statusFilter
-    const matchesNameText = employee.name.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesStatusText = employee.status.toLowerCase().includes(searchQuery.toLowerCase())
+    const matchesNameText = employee.name.toLowerCase().includes(lowerSearchQuery)
+    const matchesStatusText = employee.status.toLowerCase().includes(lowerSearchQuery)
 
     return matchesStatus && (matchesNameText || matchesStatusText)
   })
@@ -23,7 +25,7 @@ export const useFilteredEmployees = (employees: Employee[]) => {
     parse: value => value as Status
   })
 
-  const filteredEmployees = filterEmployees(employees, statusFilter as Status, searchQuery)
+  const filteredEmployees = filterEmployees(employees, statusFilter, searchQuery)
 
   return {
     filteredEmployees,

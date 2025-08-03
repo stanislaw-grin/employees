@@ -12,7 +12,7 @@ export const fetchEmployees = async (): Promise<Employee[]> => {
   return res.json()
 }
 
-export const updateEmployeeStatus = async (id: number, status: Status) => {
+export const updateEmployeeStatus = async (id: number, status: Status): Promise<Employee[]> => {
   const res = await fetch(`${API_URL}/users/${id}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
