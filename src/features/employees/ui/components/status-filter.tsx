@@ -16,7 +16,7 @@ export const StatusFilter = ({ statusFilter, setStatusFilter }: Props) => {
       <select
         id="employee-status"
         value={statusFilter}
-        onChange={(e) => { setStatusFilter(e.target.value as Status | ''); }}
+        onChange={(e) => setStatusFilter(e.target.value as Status | '')}
         className="px-3 py-4 pr-10 text-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 appearance-none bg-transparent"
       >
         <option value="" disabled hidden>

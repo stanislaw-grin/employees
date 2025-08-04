@@ -145,7 +145,7 @@ describe('useEmployees', () => {
 
     const { result } = renderHook(() => useEmployees())
 
-    result.current.applyStatus(1, 'Working')
+    result.current.applyStatus({ id: 1, status: 'Working' })
 
     expect(mockMutate).toHaveBeenCalledWith({ id: 1, status: 'Working' })
   })

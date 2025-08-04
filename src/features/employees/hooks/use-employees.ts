@@ -22,7 +22,7 @@ export const useEmployees = () => {
 
   const queryClient = useQueryClient()
 
-  const mutation = useMutation({
+  const applyStatusMutation = useMutation({
     mutationFn: ({ id, status }: UpdateStatusPayload) => updateEmployeeStatus(id, status),
 
     onMutate: async ({ id, status }) => {
@@ -54,10 +54,6 @@ export const useEmployees = () => {
     },
   })
 
-  const applyStatus = useCallback((id: number, status: Status) => {
-    mutation.mutate({ id, status })
-  }, [mutation])
-
   const {
     filteredEmployees,
     searchQuery,
@@ -82,7 +78,7 @@ export const useEmployees = () => {
     employees: filteredEmployees,
     isLoading,
     error,
-    applyStatus,
+    applyStatus: applyStatusMutation.mutate,
     searchQuery,
     setSearchQuery,
     statusFilter,

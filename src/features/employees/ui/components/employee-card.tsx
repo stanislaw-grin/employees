@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 
 import { CheckIcon, Pencil } from 'lucide-react'
 
@@ -16,11 +16,11 @@ const statusColors: Record<Status, string> = {
 
 interface Props {
   employee: Employee,
-  applyStatus: (id: number, status: Status) => void,
+  applyStatus: ({ id, status }: { id: number, status: Status }) => void,
   onEdit: (employee: Employee) => void,
 }
 
-export const EmployeeCard = ({ employee, applyStatus, onEdit }: Props) => {
+export const EmployeeCard = memo(({ employee, applyStatus, onEdit }: Props) => {
   const [currentStatus, setCurrentStatus] = useState<Status>(employee.status)
 
   const isStatusDirty = employee.status !== currentStatus
@@ -28,16 +28,16 @@ export const EmployeeCard = ({ employee, applyStatus, onEdit }: Props) => {
   return (
     <div
       className={
-      cn(
-        'group relative w-full flex items-center bg-white rounded shadow-lg hover:shadow-sky-500/20' +
-        ' transition-shadow p-4',
-        isStatusDirty && 'bg-yellow-100/60'
-      )
-    }>
+        cn(
+          'group relative w-full flex items-center bg-white rounded shadow-lg hover:shadow-sky-500/20' +
+          ' transition-shadow p-4',
+          isStatusDirty && 'bg-yellow-100/60'
+        )
+      }>
 
       <button
         aria-label="Edit employee"
-        onClick={() => { onEdit(employee); }}
+        onClick={() => { onEdit(employee) }}
         className="absolute top-2 right-2 p-1 hover:bg-gray-100 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
       >
         <Pencil size={16}/>
@@ -64,7 +64,7 @@ export const EmployeeCard = ({ employee, applyStatus, onEdit }: Props) => {
             <select
               id={`${employee.id}-status-select`}
               value={currentStatus}
-              onChange={(e) => { setCurrentStatus(e.target.value as Status); }}
+              onChange={(e) => setCurrentStatus(e.target.value as Status)}
               className="text-sm w-full bg-transparent px-1 py-0.5 pr-4 focus:outline-none appearance-none truncate"
             >
               {EmployeeStatuses.map((s) => (
@@ -75,7 +75,7 @@ export const EmployeeCard = ({ employee, applyStatus, onEdit }: Props) => {
             {isStatusDirty && (
               <button
                 className="relative group right-4 hover:text-green-600 transition-colors rounded-full"
-                onClick={() => { applyStatus(employee.id, currentStatus); }}
+                onClick={() => applyStatus({ id: employee.id, status: currentStatus })}
                 aria-label="Toggle status">
                 <CheckIcon size={14}/>
 
@@ -92,4 +92,4 @@ export const EmployeeCard = ({ employee, applyStatus, onEdit }: Props) => {
       </div>
     </div>
   )
-}
+})

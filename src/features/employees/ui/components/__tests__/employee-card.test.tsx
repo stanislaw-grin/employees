@@ -89,7 +89,7 @@ describe('EmployeeCard Component', () => {
     const applyButton = screen.getByRole('button', { name: 'Toggle status' })
     await user.click(applyButton)
 
-    expect(mockApplyStatus).toHaveBeenCalledWith(1, 'OnVacation')
+    expect(mockApplyStatus).toHaveBeenCalledWith({ id: 1, status: 'OnVacation' })
   })
 
   it('displays all status options in dropdown', () => {
