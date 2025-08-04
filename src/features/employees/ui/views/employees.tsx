@@ -46,8 +46,8 @@ export function Employees() {
   const isModalVisible = modalState.isOpen || modalState.employee !== null
 
   return (
-    <>
-      <div className="max-w-6xl mx-auto px-4 py-8">
+    <main className="flex-1 overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col h-full">
         <Toolbar
           openCreateUserModal={openUserModal}
           setSearchQuery={setSearchQuery}
@@ -66,22 +66,24 @@ export function Employees() {
           </div>
         )}
 
-        <div
-          role="region"
-          aria-label="Employee list"
-          className="grid gap-x-6 gap-y-6 md:gap-y-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-        >
-          {isLoading && Array.from({ length: 6 }).map((_, i) => <EmployeeCardSkeleton key={i}/>)}
+       <div className="flex-1 overflow-y-auto">
+         <div
+           role="region"
+           aria-label="Employee list"
+           className="grid gap-x-6 gap-y-6 md:gap-y-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+         >
+           {isLoading && Array.from({ length: 6 }).map((_, i) => <EmployeeCardSkeleton key={i}/>)}
 
-          {employees.map((employee) => (
-            <EmployeeCard
-              key={employee.id}
-              employee={employee}
-              applyStatus={applyStatus}
-              onEdit={editEmployee}
-            />
-          ))}
-        </div>
+           {employees.map((employee) => (
+             <EmployeeCard
+               key={employee.id}
+               employee={employee}
+               applyStatus={applyStatus}
+               onEdit={editEmployee}
+             />
+           ))}
+         </div>
+       </div>
       </div>
 
       {isModalVisible && (
@@ -90,6 +92,6 @@ export function Employees() {
           editingEmployee={modalState.employee}
         />
       )}
-    </>
+    </main>
   )
 }
