@@ -2,8 +2,7 @@ import { renderHook } from '@testing-library/react'
 import * as nuqs from 'nuqs'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
-import { mockEmployees } from '@/test/utils'
-
+import { mockEmployees } from './mocks'
 import { useFilteredEmployees } from '../use-filtered-employees'
 
 vi.mock('nuqs', () => ({

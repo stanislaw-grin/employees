@@ -1,13 +1,51 @@
-import { screen, waitFor } from '@testing-library/react'
+import type { ReactNode } from 'react'
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
-import { useEmployees } from '@/entities/employee'
+import { type Employee, useEmployees } from '@/entities/employee'
 import { Employees } from '@/pages/employees'
-import { renderWithProviders, mockEmployees } from '@/test/utils'
 
+function renderWithProviders(ui: ReactNode) {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  })
 
-vi.mock('@/features/employees/hooks/use-employees', () => ({
+  return render(
+    <QueryClientProvider client={queryClient}>
+      {ui}
+    </QueryClientProvider>
+  )
+}
+
+const mockEmployees: Employee[] = [
+  {
+    id: 1,
+    name: 'John Doe',
+    status: 'Working',
+    img: 'https://example.com/john.jpg',
+  },
+  {
+    id: 2,
+    name: 'Jane Smith',
+    status: 'OnVacation',
+    img: 'https://example.com/jane.jpg',
+  },
+  {
+    id: 3,
+    name: 'Bob Johnson',
+    status: 'LunchTime',
+    img: 'https://example.com/bob.jpg',
+  },
+]
+
+vi.mock('@/entities/employee/model/use-employees', () => ({
   useEmployees: vi.fn(),
 }))
 

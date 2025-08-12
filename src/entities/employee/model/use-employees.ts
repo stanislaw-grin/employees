@@ -2,10 +2,10 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 
 import type { Employee, Status } from '@/entities/employee'
-import { employeeQueries } from '@/entities/employee'
 
 import { useFilteredEmployees } from './use-filtered-employees'
 import { fetchEmployees, updateEmployeeStatus } from '../api'
+import { employeeQueries } from '../api/query-keys.ts'
 
 interface UpdateStatusPayload {
   id: number;

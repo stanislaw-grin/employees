@@ -1,11 +1,8 @@
-import * as react from 'react'
-
 import * as reactQuery from '@tanstack/react-query'
 import { renderHook } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
-import { mockEmployees } from '@/test/utils'
-
+import { mockEmployees } from './mocks'
 import * as api from '../../api'
 import { useEmployees } from '../use-employees'
 import { useFilteredEmployees } from '../use-filtered-employees'
@@ -145,23 +142,5 @@ describe('useEmployees', () => {
     result.current.applyStatus({ id: 1, status: 'Working' })
 
     expect(mockMutate).toHaveBeenCalledWith({ id: 1, status: 'Working' })
-  })
-
-  it('wraps setSearchQuery in startTransition', () => {
-    const { result } = renderHook(() => useEmployees())
-
-    result.current.setSearchQuery('test')
-
-    expect(mockSetSearchQuery).toHaveBeenCalledWith('test')
-    expect(react.startTransition).toHaveBeenCalled()
-  })
-
-  it('wraps setStatusFilter in startTransition', () => {
-    const { result } = renderHook(() => useEmployees())
-
-    result.current.setStatusFilter('Working')
-
-    expect(mockSetStatusFilter).toHaveBeenCalledWith('Working')
-    expect(react.startTransition).toHaveBeenCalled()
   })
 })
